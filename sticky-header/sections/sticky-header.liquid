@@ -1,7 +1,52 @@
 {% assign hader__class = section.settings.header_style  %}
 
+{% style %}
+    .header--sticky
+    {
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: position 10s;
+        -ms-transition: position 10s;
+        -o-transition: position 10s;
+        transition: all 0.5s ease;
+    }
+
+    .fixed
+    {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        animation: smoothScroll 1s forwards;
+        z-index: 9999;
+    }
+
+    @keyframes smoothScroll
+    {
+        0%
+        {
+            transform: translateY(-100px);
+        }
+        100%
+        {
+            transform: translateY(0px);
+        }
+    }
+{% endstyle %}
+
 <header class="site-header header--{{ hader__class }}" role="banner">
+    <!-- Your header content goes here like navigation links, logo, icons etc. -->
 </header>
+
+<script>
+    // Script to add sticky class to header on scroll
+    $(window).scroll(function() {
+        var sticky = $('.header--sticky'),
+            scroll = $(window).scrollTop();
+
+        if (scroll >= 40) sticky.addClass('fixed');
+        else sticky.removeClass('fixed');
+    });
+</script>
 
 {% schema %}
     {
