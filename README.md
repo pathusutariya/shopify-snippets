@@ -1,2 +1,0 @@
-# shopify-snippets
-Shopify Snippets

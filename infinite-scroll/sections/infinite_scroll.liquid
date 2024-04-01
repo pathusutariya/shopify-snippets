@@ -1,10 +1,22 @@
+{% style %}
+    .paginate-loading
+    {
+        padding-top: 20px;
+    }
+{% endstyle %}
+
 <ul class="grid grid--uniform">
     {% if section.settings.infinite_scroll %}
       <div id="AjaxinateLoop" >
     {% endif %}
     {% for product in collection.products %}
       <li class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
-        {% include 'product-card-grid', max_height: max_height %}
+          {% comment %}
+            You need to include the product card snippet of your theme to display the product.
+            For example:
+               {% include 'product-card', product: product %}
+             - You can pass any other parameter that you need in the snippet.
+          {% endcomment %}
       </li>
     {% endfor %}
     {% if section.settings.infinite_scroll %}
@@ -13,7 +25,9 @@
   </ul>
   
   {% if paginate.pages > 1 and section.settings.infinite_scroll == false %}
-    {% include 'pagination' %}
+    {% comment %}
+        If you don't want to use infinite scroll, you can use the default pagination of your theme.
+    {% endcomment %}
   {% endif %}
   
   {% if section.settings.infinite_scroll %}

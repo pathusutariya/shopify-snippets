@@ -1,25 +1,27 @@
-# Scrollify
-## Infinite Scroll Function for Shopify
-<button>[Download js](https://minionmade.github.io/scrollify/)</button> 
+# Infinite Scroll Function for Shopify
+
+## Overview
+- Infinite scrolling is a technique used to enhance user experience by loading more products dynamically as the user scrolls down the collection page, eliminating the need for pagination. This documentation provides a guide on implementing infinite scrolling in Shopify collections.
 
 ## Features
 
 - Endless scrolling - scroll to the bottom of the content to load next.
 - Endless click - Like endless scroll but click a link to load the next pages.
 
+<button>[Download js](https://minionmade.github.io/scrollify/)</button>
+
 ## Getting Started
 
+- First of all, you need to downlaod the scrollify JS to make the infinite scroll work in your shopify store.
+- To download the scrollify JS, click on above button.
+- After downloading the file, add it to your project.
 - Add ajaxinate.min.js to the assets folder of your shopify theme.
-- Add ajaxinate.min.js before the closing body tag.
-
-
-<code>>_liquid</code>
-<br>
-
-    {{ 'instafeed.js' | asset_url | script_tag }}
-
-
-Setup your collection or blog template,for example:
+- Include ajaxinate.min.js before the closing body tag.
+- You need to copy the code from the section `infinite_scroll.liquid` and paste it in your theme.liquid file.
+- If your theme code has layout for the infinite scroll then you can merge the code with your existing code otherwise you can add the above mention file in your theme code.
+- Include the section `infinite_scroll.liquid` in your code where you want to show the infinite scroll.
+- Add the `ajax-loader.gif` as well in the assets folder of your theme code to show the loader while loading the next page.
+- Set up your collection or blog template,for example:
 
 <code>>_liquid</code>
 
@@ -37,7 +39,7 @@ Setup your collection or blog template,for example:
         </div>
     {% endpaginate %}
 
-Initialize it in your script file or inline
+- Initialize it in your script file or inline
 
 
 ## Settings
@@ -66,3 +68,11 @@ Description: Stop Ajaxinate from running and unbind the event listeners
         const endlessCollection = new Ajaxinate();
     // Destroy the instance
         endlessCollection.destroy();
+
+## Testing
+
+- After implementing the above steps, test the infinite scrolling functionality thoroughly to ensure it works as expected across different devices and browsers.
+
+## Conclusion
+
+- Congratulations! You have successfully implemented infinite scrolling in your Shopify collection, providing a seamless browsing experience for your customers.
