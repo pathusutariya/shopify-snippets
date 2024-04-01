@@ -1,7 +1,6 @@
-
 # Quick Add to cart bar
 
-## Introduction
+## Overview
 
 The Quick Add to Cart Bar is a user interface feature designed to enhance the user experience by providing convenient access to the shopping cart functionality while browsing a product page. This feature is particularly useful where users frequently browse through various products and may want to add items to their cart without having to scroll back to the top of the page.
 
