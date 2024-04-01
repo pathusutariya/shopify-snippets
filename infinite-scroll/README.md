@@ -1,23 +1,16 @@
 # Infinite Scroll Function for Shopify
 
 ## Overview
-- Infinite scrolling is a technique used to enhance user experience by loading more products dynamically as the user scrolls down the collection page, eliminating the need for pagination. This documentation provides a guide on implementing infinite scrolling in Shopify collections.
+Infinite scrolling is a technique used to enhance user experience by loading more products dynamically as the user scrolls down the collection page, eliminating the need for pagination. This documentation provides a guide on implementing infinite scrolling in Shopify collections.
 
 ## Features
-
 - Endless scrolling - scroll to the bottom of the content to load next.
 - Endless click - Like endless scroll but click a link to load the next pages.
 
-<button>[Download js](https://minionmade.github.io/scrollify/)</button>
-
-## Getting Started
-
-- First of all, you need to downlaod the scrollify JS to make the infinite scroll work in your shopify store.
-- To download the scrollify JS, click on above button.
-- After downloading the file, add it to your project.
-- Add ajaxinate.min.js to the assets folder of your shopify theme.
-- Include ajaxinate.min.js before the closing body tag.
-- You need to copy the code from the section `infinite_scroll.liquid` and paste it in your theme.liquid file.
+## Installation
+To make the infinite scroll functionality work on your Shopify store, follow the steps below:
+- Copy the code from `ajaxinate.min.js` and paste it in the JS file of your theme code and add JS file in your theme assets. 
+- You need to copy the code from the section `infinite_scroll.liquid` and paste it in your theme code.
 - If your theme code has layout for the infinite scroll then you can merge the code with your existing code otherwise you can add the above mention file in your theme code.
 - Include the section `infinite_scroll.liquid` in your code where you want to show the infinite scroll.
 - Add the `ajax-loader.gif` as well in the assets folder of your theme code to show the loader while loading the next page.
@@ -43,9 +36,7 @@
 
 
 ## Settings
-
 If you wish to change the names of the selectors you can pass them in with the following settings.
-
 
 | Option | Default | Type | Description 
 | ------ | ------ |  ------ | ------ |
@@ -59,7 +50,6 @@ If you wish to change the names of the selectors you can pass them in with the f
 ## Methods
 
 ### .destroy()
-
 Description: Stop Ajaxinate from running and unbind the event listeners
 
 <code>>_javascript</code>
