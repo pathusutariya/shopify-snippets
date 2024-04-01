@@ -1,22 +1,27 @@
 <style>
-    .section-{{ section.id }}-padding {
+    .section-{{ section.id }}-padding
+    {
         padding-top: calc({{ section.settings.padding_top }}px * 0.75);
         padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.75);
     }
 
-    @media screen and (min-width: 750px) {
-        .section-{{ section.id }}-padding {
+    @media screen and (min-width: 750px)
+    {
+        .section-{{ section.id }}-padding
+        {
             padding-top: {{ section.settings.padding_top }}px;
             padding-bottom: {{ section.settings.padding_bottom }}px;
         }
     }
 
-    .cart__inner_image {
+    .cart__inner_image
+    {
         position: relative;
         padding-bottom: 100%;
     }
 
-    .cart__inner_image > div {
+    .cart__inner_image > div
+    {
         position: absolute;
         top: 0;
         left: 0;
@@ -24,7 +29,8 @@
         height: 100%;
     }
 
-    .recently-viewed-wrapper .cart__inner_image .motion-reduce {
+    .recently-viewed-wrapper .cart__inner_image .motion-reduce
+    {
         width: 100%;
         height: 100%;
         object-fit: contain;
@@ -34,6 +40,7 @@
 <div class="section-{{ section.id }}-padding">
     <div class="page-width">
         <script>
+          // Script to get product data
             window.Shopify.productData = {
                 productTitle: "{{ product.title }}",
                 productImg: "{{ product.featured_media | image_url: width: 533 }}",
@@ -53,6 +60,7 @@
     </div>
 </div>
 
+<!-- Script to store the data of recently viewed products -->
 <script src="{{ 'recent-products.js' | asset_url }}" defer="defer"></script>
 
 
