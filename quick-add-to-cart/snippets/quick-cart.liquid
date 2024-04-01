@@ -14,6 +14,7 @@
             </div>
         </div>
         <div class="product-form-control">
+            <!-- Product variants -->
             <div class="variant-selector">
                 <div class="product-variant{% if product.has_only_default_variant %} hidden{% endif %}">
                     <div class="select-variant" id="variant-select">
@@ -76,6 +77,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Quantity selector -->
             <div class="quantity-selector">
                 <div id="Quantity-Form-{{ section.id }}" class="product-form__quantity">
                     <quantity-input class="quantity">
@@ -107,6 +110,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Add to cart button -->
             <div class="add-to-cart-wrapper">
                 <div class="product-form__buttons">
                     {%- liquid
