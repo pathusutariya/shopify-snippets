@@ -1,18 +1,16 @@
-<div class="page-width">
-    <div class="section-header text-center">
-      <h4 class="h4" data-popup-id="popup_main-1" data-popup-button>Your Title</h4>
-    </div>
-
-    <popup-details class="custom-model-main" id="popup_main-1">
-        <div class="custom-model-inner">
-            <div class="close-btn" data-popup-close>×</div>
-            <div class="custom-model-wrap">
-                <div class="pop-up-content-wrap">
-                    <img src="https://img.freepik.com/free-vector/thank-you-lettering_1262-6963.jpg?size=626&ext=jpg&ga=GA1.1.1687694167.1711929600&semt=sph">
-                </div>
-            </div>
-        </div>
-        <div class="bg-overlay"></div>
-    </popup-details>
+<div class="section-header text-center">
+    {% comment %} if below button has both data attributes, the popup won't be open {% endcomment %}
+  <button class="button h4" data-popup-id="popup_main-1" data-popup-button>Your Title</button>
 </div>
 
+<popup-details class="custom-model-main" id="popup_main-1">
+    <div class="custom-model-inner">
+        <div class="close-btn" data-popup-close>×</div>
+        <div class="custom-model-wrap">
+            <div class="pop-up-content-wrap">
+                <img src="https://img.freepik.com/free-vector/thank-you-lettering_1262-6963.jpg?size=626&ext=jpg&ga=GA1.1.1687694167.1711929600&semt=sph">
+            </div>
+        </div>
+    </div>
+    <div class="bg-overlay"></div>
+</popup-details>
