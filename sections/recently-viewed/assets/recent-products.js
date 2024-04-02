@@ -10,8 +10,8 @@ function setRecentlyViewedProducts() {
         localStorage.setItem("recentlyViewedProduct", productDataString);
     } else {
         const oldProductData = JSON.parse(localData);
-        const countProductData = (oldProductData.match(/productTitle/g) || []).length;
-        const sameProduct = oldProductData.includes(currProductPageTitle);
+        const countProductData = oldProductData.length;
+        const sameProduct = oldProductData.some(item => item.productTitle === currProductPageTitle);
         let jsonRespArr;
 
         if (countProductData < numberOfProducts && !sameProduct) {
