@@ -1,0 +1,47 @@
+{% assign gift_product_show = true %}
+{% assign gift_product = all_products[section.settings.gift_product] %}
+{% for item in cart.items %}
+    {% if item.product_id == gift_product.id %}
+      {% assign gift_product_show = false %}
+    {% endif %}
+{% endfor %}
+
+{% if gift_product_show %}
+  <div class="gift-product-wrapper">
+      <div class="gift-product-cart-box">
+        {% if section.settings.gift_product_label != blank %}
+          <h2 class="gift-product-title">{{ section.settings.gift_product_label }}</h2>
+        {% endif %}
+        <div class="gift-product--wrapper flex">
+          <div class="cart-image cart-product-styling">
+            <img src="{{ gift_product.images[0] | img_url: '500x' }}" alt="{{ gift_product.title }}">
+          </div>
+            <div class="cart-details-without-total">
+              <div class="cart-description cart-product-details-styling">
+                  {{ gift_product.title }}
+              </div>
+              <div class="btn-wrapper">
+                <form id="gift_product_form" method="post" action="/cart/add">
+                  <input type="hidden" name="id" value="{{ gift_product.first_available_variant.id }}" />
+                  <input class="hide" min="1" type="number" id="quantity" name="quantity" value="1" />
+                  <button type="submit" class="addToCart-btn snize-button">Add to cart</button>
+                </form>
+              </div>
+          </div>
+        </div>
+      </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+   "name": "",
+  "settings": [
+    {
+        "type": "product",
+        "id": "gift_product",
+        "label": "Gift Product"
+    }
+  ]
+}
+{% endschema %}

@@ -16,6 +16,7 @@ function addCartFreeGift(data){
             if ($("#free_gift_product_form").length > 0) {
                 $("#free_gift_product_form").find(".addToCart-btn").attr('disabled', 'disabled');
             }
+            location.reload();
         },
         error: function (XMLHttpRequest, textStatus) {
         }
