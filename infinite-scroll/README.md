@@ -29,7 +29,7 @@ To make the infinite scroll functionality work on your Shopify store, follow the
 <code>>_liquid</code>
 
     {% paginate collection.products by 3 %}
-        <div id="AjaxinateLoop" >
+        <div id="AjaxinateLoop" class="ajaxinateLoop">
         {% for product in collection.products %}
             {% include 'product-grid-item' %}
         {% endfor %}
@@ -48,14 +48,14 @@ To make the infinite scroll functionality work on your Shopify store, follow the
 ## Settings
 If you wish to change the names of the selectors you can pass them in with the following settings.
 
-| Option | Default | Type | Description 
-| ------ | ------ |  ------ | ------ |
+| Option | Default              | Type | Description 
+| ------ |----------------------|  ------ | ------ |
 | pagination | #AjaxinatePagination | String | A selector to identify the pagination container. |
-| container | #AjaxinateLoop | String | A selector to identify the grid that you want to duplicate. |
-| method | scroll | String | Can be changed to click to that users must click to load more. |
-| offset | 0 | Integer | Decrease the distance required to scroll before sending a request. |
-| loadingText | Loading | String | Change the text of the pagination link during a request. |
-| callback | null | Function | A function fired after the new page has been loaded. |
+| container | .ajaxinateLoop       | String | A selector to identify the grid that you want to duplicate. |
+| method | scroll               | String | Can be changed to click to that users must click to load more. |
+| offset | 0                    | Integer | Decrease the distance required to scroll before sending a request. |
+| loadingText | Loading              | String | Change the text of the pagination link during a request. |
+| callback | null                 | Function | A function fired after the new page has been loaded. |
 
 ## Methods
 
