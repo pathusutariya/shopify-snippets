@@ -35,32 +35,32 @@ function getRecentlyViewedProducts() {
     productData.forEach(item => {
         if (item.productTitle) {
             recentlyViewedHtml.unshift(`
-    <li class="grid__item">
-     <div class="card-wrapper">
-        <div class="cart__inner_image">
-          <div>
-            <img class="motion-reduce" src="${item.productImg}" width="${item.imgWidth}" height="${item.imgHeight}"  loading="lazy" alt="${item.productImageAltText}"/>
-          </div>
-         </div>
-         <div class="card__content">
-           <div class="card__information">
-             <h3 class="card__heading h5">
-             <a class="full-unstyled-link" href="${item.productUrl}">${item.productTitle}</a></h3>
-               <div class="card-information">
-                 <div class="price ">
-                   <div class="price__container">
-                     <div class="price-item price-item--regular">
-                         ${item.productPrice}
-                     </div>
-                   </div>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-    </li>
-   `);
+                <li class="grid__item">
+                  <div class="card-wrapper">
+                    <div class="cart__inner_image">
+                      <div>
+                        <img class="motion-reduce" src="${item.productImg}" width="${item.imgWidth}" height="${item.imgHeight}" loading="lazy" alt="${item.productImageAltText}"/>
+                      </div>
+                    </div>
+                    <div class="card__content">
+                      <div class="card__information">
+                        <h3 class="card__heading h5">
+                          <a class="full-unstyled-link" href="${item.productUrl}">${item.productTitle}</a>
+                        </h3>
+                        <div class="card-information">
+                          <div class="price ">
+                            <div class="price__container">
+                              <div class="price-item price-item--regular">
+                                ${item.productPrice}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+            `);
         }
     });
 
