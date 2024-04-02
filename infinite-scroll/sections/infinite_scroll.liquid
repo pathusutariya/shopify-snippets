@@ -8,10 +8,7 @@
     }
 {% endstyle %}
 
-<ul class="grid grid--uniform">
-    {% if section.settings.infinite_scroll %}
-      <div id="AjaxinateLoop" class="grid">
-    {% endif %}
+<ul class="grid grid--uniform" class="{% if section.settings.infinite_scroll %} ajaxinateLoop {% endif %}">
     {% for product in collection.products %}
       <li class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
           {% comment %}
@@ -22,9 +19,6 @@
           {% endcomment %}
       </li>
     {% endfor %}
-    {% if section.settings.infinite_scroll %}
-      </div>  
-    {% endif %}
   </ul>
   
   {% if paginate.pages > 1 and section.settings.infinite_scroll == false %}
@@ -57,7 +51,7 @@
 <script type="text/javascript">
   document.addEventListener("DOMContentLoaded", function() {
     var endlessScroll = new Ajaxinate({
-      container: '#AjaxinateLoop',
+      container: '.ajaxinateLoop',
       pagination: '#AjaxinatePagination',
       loadingText: '<img src="{{ 'ajax-loader.gif' | asset_url }}">'
     });
