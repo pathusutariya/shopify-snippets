@@ -6,7 +6,7 @@ With this code, you can remove the CAPTCHA validation on form submit in shopify.
 ## Installation
 You need to make changes in below mentioned files to remove the captcha on form submission.
 
-- Copy the below code and paste it in script tag in the theme.liquid file before the closing body tag.
+- Copy the below code and paste it in form tag in which you want to remove the captcha.
   ```javascript
    onsubmit='window.Shopify.recaptchaV3.addToken(this, "create_customer"); return false;'
   ```
