@@ -10,7 +10,7 @@
 
 <ul class="grid grid--uniform">
     {% if section.settings.infinite_scroll %}
-      <div id="AjaxinateLoop" >
+      <div id="AjaxinateLoop" class="grid">
     {% endif %}
     {% for product in collection.products %}
       <li class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">

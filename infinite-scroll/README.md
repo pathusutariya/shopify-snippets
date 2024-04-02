@@ -14,6 +14,16 @@ To make the infinite scroll functionality work on your Shopify store, follow the
 - If your theme code has layout for the infinite scroll then you can merge the code with your existing code otherwise you can add the above mention file in your theme code.
 - Include the section `infinite_scroll.liquid` in your code where you want to show the infinite scroll.
 - Add the `ajax-loader.gif` as well in the assets folder of your theme code to show the loader while loading the next page.
+- If you don't want to use the code from the section `infinite_scroll.liquid` then you can use your custom selector and set it as container in JS to implement the infinite scroll.
+- It it necessary to add the pagination code of infinite scroll to make collection or blog page work with infinite scroll.
+- For the pagination or load more text you can use the code mentioned below:
+    ```liquid
+    <div id="AjaxinatePagination">
+        {% if paginate.next %}
+            <a href="{{ paginate.next.url }}">Loading More</a>
+        {% endif %}
+    </div>
+    ```
 - Set up your collection or blog template,for example:
 
 <code>>_liquid</code>
@@ -24,7 +34,7 @@ To make the infinite scroll functionality work on your Shopify store, follow the
             {% include 'product-grid-item' %}
         {% endfor %}
         </div>
-
+    
         <div id="AjaxinatePagination">
         {% if paginate.next %}
             <a href="{{ paginate.next.url }}">Loading More</a>
