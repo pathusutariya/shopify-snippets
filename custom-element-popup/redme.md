@@ -13,6 +13,8 @@ To make the custom element pop-up work on your website, you need to follow the b
     ```html
     data-popup-id="popup_main-1" data-popup-button
     ```
+- Make sure that the data-popup-id is same as the id of the pop-up div.
+- If your site has more than one custom popup, then you need to set different ids for each popup and button.
 - After adding the files in folders and attributes in the button, test the pop-up by clicking on the button.
 - If the pop-up is not working, check the console for any errors.
 - If you are still facing any issues, check if any other JS or CSS is conflicting with the pop-up file.
