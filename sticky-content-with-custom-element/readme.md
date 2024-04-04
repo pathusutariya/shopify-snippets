@@ -46,7 +46,6 @@ To make the sticky content at the bottom of the page, you need to follow the bel
         </sticky-scroll-direction>
     </div>
     ```
-- To stick the content, you need to add the `position: sticky;` to the sticky content element.
 - By position sticky, the content will stick to the top of the page with the help of JS.
 - By adding the `display: block;`, the content will stick to the bottom of the page.
 

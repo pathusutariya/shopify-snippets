@@ -161,6 +161,7 @@ if (!customElements.get('sticky-scroll-direction')) {
             const maxTop = bounds.top + window.scrollY - this.container.offsetTop + this.defaultTop;
             const minTop = this.container.clientHeight - window.innerHeight;
 
+            this.container.style.position = 'sticky';
             if (window.scrollY < this.scrollY) {
                 this.currentTop -= window.scrollY - this.scrollY;
             } else {
