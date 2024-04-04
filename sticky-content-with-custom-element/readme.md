@@ -13,7 +13,7 @@ To make the sticky content at the bottom of the page, you need to follow the bel
     ```
 - After adding including the file, copy the JS from the `sticky-scroll.js` of current repository.
 - Paste the copied JS in the `sticky-scroll.js` file of your theme code.
-- You have to update the header selector to get the height of the header in the line below the comment in the JS file.
+- You need to add a class `'header-wrapper'` in the header tag to make sticky content. it is necessory to add this class.   
 - Copy the below mentioned JS code and paste it in `theme.liquid` file before the closing of the body tag.
     ```html
     <script>

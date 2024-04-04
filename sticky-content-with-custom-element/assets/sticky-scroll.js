@@ -59,8 +59,7 @@ function debounce(fn, wait = 300) {
     };
 }
 
-// Change the selector below as added in header tag in your theme code.
-var headerHeight = document.querySelector('.header').offsetHeight;
+var headerHeight = document.querySelector('.header-wrapper').offsetHeight;
 document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
 
 if (!customElements.get('sticky-scroll-direction')) {
@@ -70,8 +69,7 @@ if (!customElements.get('sticky-scroll-direction')) {
         }
 
         init() {
-            // Change the selector below as added in header tag in your theme code.
-            const headerIsSticky = document.querySelector('.header');
+            const headerIsSticky = document.querySelector('.header-wrapper');
             this.headerHeight = Number.parseInt(getComputedStyle(this.parentElement).getPropertyValue('--header-height').replace('px', ''), 10);
             this.container = this.firstElementChild;
             this.currentTop = Number.parseInt(document.documentElement.scrollTop + this.getBoundingClientRect().top - this.offsetTop,10);
