@@ -1,8 +1,7 @@
- jQuery(document).ready(function ($) {
+jQuery(document).ready(function ($) {
 
-/* ============================= upload image ============================= */
+    /* ============================= upload image ============================= */
     /* Todo: Add file list
-        - heic2any.min.js
         - cropper.js
     */
 
@@ -11,14 +10,13 @@
         let usedFileInput = false;
 
         // Support image type
-        const supportedImage = ["image/png", "image/jpeg", ".heic"];
+        const supportedImage = ["image/png", "image/jpeg"];
         // Image uploader section
         const imageStage = document.getElementById('cp-stage-1');
-        // Form
-        const slideIn = document.querySelector('form.cp-slideIn');
+
         // Maximum file size to upload
         // const maxFileSize = +slideIn.dataset.fileSize;
-        const addToCartBtn = document.querySelector('#addToCart'); // Add to cart button
+        const addToCartBtn = document.querySelector('.product-form__submit'); // Add to cart button
         const cropperContainer = document.querySelector('[data-cropper]'); // Cropper space
         const cropperImgElm = cropperContainer.querySelector('[data-cropper-img]'); // Cropper image element
         const imageUpload = document.getElementById('imageUpload'); // input type image uploader
@@ -26,7 +24,6 @@
         let imageBlob = ''
 
         function resetFileInput(field) {
-            field.type = "text";
             field.type = "file";
         }
 
@@ -40,50 +37,35 @@
                     resetFileInput(imageUpload);
                     return
                 }
-                if (fileExt === ".heic") {
-                    imageStage.classList.add('loading');
-                    imageMimeType = 'image/jpeg';
-                    const blob = imageUpload.files[0];
-                    heic2any({
-                        blob: blob,
-                        toType: imageMimeType,
-                        quality: 0.75
-                    })
-                        .then(function (resultBlob) {
-                            initCropper(URL.createObjectURL(resultBlob));
-                            imageStage.classList.remove('loading');
-                        })
-                        .catch(function (x) {
-                            console.log(x.code);
-                            console.log(x.message);
-                        });
-                } else {
-                    imageMimeType = imageUpload.files[0].type;
-                    initCropper(URL.createObjectURL(imageUpload.files[0]));
-                }
+                imageMimeType = imageUpload.files[0].type;
+                console.log('imageUpload:: ', imageUpload.files[0]);
+                initCropper(URL.createObjectURL(imageUpload.files[0]));
             }
-        })
+        });
 
         // Uploaded file remove button
         const deleteImage = document.getElementById('deleteImage');
-
         function initCropper(blob) {
             const setImageSrc = document.getElementById('setImg');
+            const setOriginalImage = document.querySelector('input[name="properties[Original_image]"]');
+            const setImage =  document.querySelector('input[name="properties[Image]"]');
             let upload_bg_set = $(".upload-bg-set");
-            if(upload_bg_set){
+            if(upload_bg_set) {
                 upload_bg_set.addClass('add-bg-url');
                 upload_bg_set.css('display', 'block');
-                upload_bg_set.css('background-image', 'url(' + blob + ')');
+                // upload_bg_set.css('background-image', 'url(' + blob + ')');
+                // upload_bg_set.find('#setImg').attr('src', blob );
             }
-            if(setImageSrc){
+            if(setImageSrc) {
                 setImageSrc.src = blob;
                 setImageSrc.setAttribute("xlink:href", blob)
                 setImageSrc.parentElement.style.display = 'block';
             }
-            deleteImage.style.display = 'block';
-            setTimeout(function (){
-                $("#doneEditImage").trigger('click');
-            },800);
+            if(setOriginalImage) {
+                setOriginalImage.value = blob;
+            }
+            deleteImage.style.display = 'inline-block';
+
             // zooming slider
             const zoomRangeInput = document.getElementById('zoom');
             // parent of zooming slider
@@ -96,8 +78,7 @@
             cropperImgElm.src = blob;
 
             const cropper = new Cropper(cropperImgElm, {
-                autoCrop: false,
-                aspectRatio: 16 / 9,
+                aspectRatio: 1,
                 autoCropArea: 1,
                 viewMode: 1,
                 minCropBoxHeight: (cropBoxSize / 100) * 80,
@@ -110,16 +91,36 @@
                 highlight: false,
                 cropBoxMovable: false,
                 cropBoxResizable: false,
-                toggleDragModeOnDblclick: false,    
+                toggleDragModeOnDblclick: false,
                 ready() {
                     cropper.zoomTo(0);
                 }
             });
-
             function updateCroppedImg() {
                 cropper.getCroppedCanvas().toBlob((blob) => {
                     imageBlob = blob;
                 }, imageMimeType);
+
+                let image_url = cropper.getCroppedCanvas().toDataURL(imageMimeType);
+                console.log('image url string:: ', image_url);
+
+                if(setImage && image_url) {
+                    fetch(image_url)
+                        .then((response)=> {
+                            return response.blob();
+                        })
+                        .then(blob=> {
+                            if(blob) {
+                                setImage.value = URL.createObjectURL(blob);
+                            }
+                        });
+                }
+
+                if(setImageSrc && image_url) {
+                    setImageSrc.src = image_url;
+                    setImageSrc.setAttribute("xlink:href", image_url)
+                    setImageSrc.parentElement.style.display = 'block';
+                }
             }
 
             function enableEditing() {
@@ -153,6 +154,13 @@
                     setImageSrc.src = '';
                     setImageSrc.parentElement.style.display = 'none';
                 }
+                if(setOriginalImage){
+                    setOriginalImage.value = '';
+                }
+                if(setImage) {
+                    setImage.value = '';
+                }
+
                 deleteImage.style.display = 'none';
                 destroy();
                 enableEditing();
@@ -198,17 +206,12 @@
             e.preventDefault();
             addToCartBtn.classList.add('loading');
 
-            const form = document.querySelector('form.cp-slideIn');
+            // This selector set product form id
+            const form = document.querySelector('form#product-form-template--17717650096364__main');
             let formData = new FormData(form);
 
             if ($('.upload-image-container.upload-bg-set').hasClass('add-bg-url')){
-                if ($('.stamp-tabs .tab-link.active[data-tab="stamp-logo"]').length > 0){
-                    formData.append('properties[Stamp Logo]', imageBlob, `img.${imageMimeType.includes('jpeg') ? 'jpg' : 'png'}`);
-                } else if ($('.stamp-tabs .tab-link.active[data-tab="printed-logo"]').length > 0){
-                    formData.append('properties[Printed Logo]', imageBlob, `img.${imageMimeType.includes('jpeg') ? 'jpg' : 'png'}`);
-                } else  {
-                    formData.append('properties[Image]', imageBlob, `img.${imageMimeType.includes('jpeg') ? 'jpg' : 'png'}`);
-                }
+                formData.append('properties[Image]', imageBlob, `img.${imageMimeType.includes('jpeg') ? 'jpg' : 'png'}`);
                 html2canvas(document.querySelector(".shape-imageContainer"),{useCORS: true}).then(function(canvas) {
                     /* var link = document.createElement("a");
                     document.body.appendChild(link);
@@ -216,7 +219,7 @@
                     link.href = canvas.toDataURL("image/png");
                     link.target = '_blank';
                     link.click();*/
-                    
+
                     canvas.toBlob(function(data){
                         formData.append('properties[Final Image]', data, `img.${imageMimeType.includes('jpeg') ? 'jpg' : 'png'}`);
                         addToCartEvent();
@@ -225,7 +228,7 @@
             } else {
                 addToCartEvent();
             }
-            
+
             function addToCartEvent() {
                 fetch('/cart/add.js', {
                     method: 'POST',
@@ -246,28 +249,6 @@
                         } else {
                             img_url = res.image
                         }
-                        // Cart js Callback
-                        jQuery.getJSON('/cart.js', function (cart) {
-                            $(".js-number-cart").html(cart.item_count);
-                            $('.product-popup').find('.product-item-count').html(cart.item_count);  
-                            $('.product-popup').find('.product-total-cart').html(Shopify.formatMoney(cart.total_price, settings.moneyFormat));
-                        });
-                        $("#minicart-wrapper").html(res.sections["minicart-section"]);
-
-                        // Mini Product Item Popup Data Set
-                        $(".product-popup .mini-product-item").remove();
-                        $(".product-popup .also_like_prod").before(res.sections["mini-product-item-section"])
-                        $('.product-popup').find('.product-name').html(res.title);  
-                        $('.product-popup').find('.product-price').html(Shopify.formatMoney(res.price, settings.moneyFormat)); 
-                        $('.product-popup').find('.product-qty').html(res.quantity); 
-                        $('.product-popup').find('.product-total').html(Shopify.formatMoney(res.line_price, settings.moneyFormat)); 
-                        $('.product-popup').find('.product-image img').attr('src', img_url);
-
-                        // Minicart Click event 
-                        minicart();
-
-                        // Open Mini Product Item Popup 
-                        showPopup('.product-popup');
                         addToCartBtn.classList.remove('loading');
 
                         // Open cart
@@ -280,29 +261,9 @@
                     })
             }
         }
-        
-        const formSubmit = document.querySelector('form.cp-slideIn');
-        formSubmit.addEventListener('submit', addToCart, true);
-    }
-    function minicart(){
-        $('.js-call-minicart').off().click(function() {
-          $('.js-minicart').addClass('active');
-          $('.bg-minicart').addClass('active');
-    
-        });
-        $('.close-mini-cart').off().click(function() {
-          $('.js-minicart').removeClass('active');
-          $('.bg-minicart').removeClass('active');
-    
-        });
-        $('.bg-minicart').off().click(function() {
-          $('.js-minicart').removeClass('active');
-          $('.bg-minicart').removeClass('active');
-        });
+        // This selector set product form id
+        const formSubmit = document.querySelector('form#product-form-template--17717650096364__main');
+        // formSubmit.addEventListener('submit', addToCart, true);
     }
     /* ============================= End upload image ============================= */
 });
-
-
-
-
