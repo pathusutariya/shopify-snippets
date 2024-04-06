@@ -1,54 +1,41 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<div class="main-content">
-    <div class="upload-image-warpper">
-        <div class="flex mt-a imageBtns">
-            <div class="upload-image">
-                <a onclick="document.getElementById('imageUpload').click()">UPLOAD IMAGE</a>
-            </div>
-            <div id="deleteImage" type="button" class="btn delete_image btn--secondary-accent">Remove Image</div>
-            <div id="doneEditImage" class=" btn--secondary-accent done-EditImage">
-                <span class="done">Done</span>
-                <span class="edit" hidden>Edit</span>
-            </div>
-        </div>
-        <div class="upload-image-container round-shape upload-bg-set">
-            <!-- <img id="setImg" src="" alt=""> -->
-        </div>
-        <div id="cp-stage-1" class="shape-img" style="display: none">
-            <input id="imageUpload" name="image" class="image--upload" type="file" accept="image/png, image/jpeg, .heic">
-            <div class="cp-slideIn__action" data-action="edit">
-                <div class="cp-slideIn__edit-container">
-                    <div class="cp-slideIn__cropper-container" data-cropper>
-                        <div>
-                            <div class="cp-slideIn__cropper-frame">
-                            </div>
-                            <img style="display: none" class="hidden" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="cropper" data-cropper-img>
+<div class="upload-image-warpper">
+    <!--  This files call is liquid code  -->
+    {{ 'cropper.css' | asset_url | stylesheet_tag }}
+    {{ 'cropper.js' | asset_url | script_tag }}
+    {{ 'custom.js' | asset_url | script_tag }}
+
+    <!--  product_form_id variable is shopify liquid variable set the product form id -->
+    <input type="hidden" name="properties[Original_image]" form="{{ product_form_id }}" value="">
+    <input type="hidden" name="properties[Image]" form="{{ product_form_id }}" value="">
+    <div class="upload-image-container round-shape upload-bg-set">
+        <img id="setImg" src="" alt="" width="100%">
+    </div>
+    <div id="cp-stage-1" class="shape-img">
+        <input id="imageUpload" name="image" class="image--upload" type="file" accept="image/png, image/jpeg, .heic">
+        <div class="cp-slideIn__action" data-action="edit">
+            <div class="cp-slideIn__edit-container">
+                <div class="cp-slideIn__cropper-container" data-cropper>
+                    <div>
+                        <div class="cp-slideIn__cropper-frame">
                         </div>
+                        <img style="display: none" class="hidden" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="cropper" data-cropper-img>
                     </div>
-                    <div class="cp-slideIn__cropper-controls">
-                    <!-- <div class="flex mt-a imageBtns">
-                            <button id="deleteImage" type="button" class="btn btn--secondary-accent">Remove Image</button>
-                            <div id="doneEditImage" class="btn btn--secondary-accent">
-                                <span class="done">Done</span>
-                                <span class="edit" hidden>Edit</span>
+                </div>
+                <div class="cp-slideIn__cropper-controls">
+                    <div class="flex mt-a imageBtns">
+                        <button id="deleteImage" type="button" class="btn btn--secondary-accent">Remove Image</button>
+                        <button id="doneEditImage" class="btn btn--secondary-accent">
+                            <span class="done">Done</span>
+                            <span class="edit" hidden>Edit</span>
+                        </button>
+                    </div>
+                    <div class="cp-slideIn__textGroupContent">
+                        <div class="cp-slideIn__zoom-container" data-zoom-container>
+                            <div class="flex-justify">
+                                <div>Image zoom</div>
+                                <div data-value>100%</div>
                             </div>
-                        </div> -->
-                        <div class="cp-slideIn__textGroupContent" style="display: none">
-                            <div class="cp-slideIn__zoom-container" data-zoom-container>
-                                <div class="flex-justify">
-                                    <div>Billede zoom</div>
-                                    <div data-value>100%</div>
-                                </div>
-                                <input aria-label="Billede zoom" id="zoom" type="range" value="0" min="0" max="100">
-                            </div>
+                            <input aria-label="Image zoom" id="zoom" type="range" value="0" min="0" max="100">
                         </div>
                     </div>
                 </div>
@@ -56,7 +43,3 @@
         </div>
     </div>
 </div>
-
-
-</body>
-</html>
